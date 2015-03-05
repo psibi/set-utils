@@ -29,6 +29,12 @@ isSymmetric rel = rel == relInverse
 isTransitive :: Relation a -> Bool
 isTransitive = undefined
 
+-- Relation composition: A o B 
+composition :: Ord a => Relation a -> Relation a -> Relation a
+composition relA relB = fromList $ [(a,c) | (a,b) <- listA, (e,c) <- listB, b == e]
+    where listA = toList relA
+          listB = toList relB
+
 powerset :: Ord a => Set a -> Set [a]
 powerset set = fromList $ filterM (const [True, False]) list
     where list = toList set
