@@ -23,11 +23,13 @@ isReflexive :: Ord a => Set a -> Relation a -> Bool
 isReflexive set rel = (makeReflexive set) `isSubsetOf` rel
 
 isSymmetric :: Ord a => Relation a -> Bool
-isSymmetric rel = rel == relInverse
-    where relInverse = map swap rel
+isSymmetric rel = rel == (inverseRelation rel)
 
 isTransitive :: Relation a -> Bool
 isTransitive = undefined
+
+inverseRelation :: Ord a => Relation a -> Relation a
+inverseRelation rel = map swap rel
 
 -- Relation composition: A o B 
 composition :: Ord a => Relation a -> Relation a -> Relation a
