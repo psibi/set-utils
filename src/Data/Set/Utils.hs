@@ -44,4 +44,9 @@ powerset set = fromList $ filterM (const [True, False]) list
 makeReflexive :: Ord a => Set a -> Relation a
 makeReflexive set = map (\a -> (a,a)) set
 
--- cp
+makeRelation :: Ord a => Set a -> [(a -> a -> Bool)] -> Relation a
+makeRelation set predicates = fromList $ [(x,y) | x <- list, 
+                                                  y <- list, 
+                                                  and (List.map (\pred -> pred x y) predicates)]
+    where list = toList set 
+
