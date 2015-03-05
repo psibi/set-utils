@@ -25,8 +25,8 @@ isReflexive set rel = (makeReflexive set) `isSubsetOf` rel
 isSymmetric :: Ord a => Relation a -> Bool
 isSymmetric rel = rel == (inverseRelation rel)
 
-isTransitive :: Relation a -> Bool
-isTransitive = undefined
+isTransitive :: Ord a => Relation a -> Bool
+isTransitive rel = (composition rel rel) `isSubsetOf` rel
 
 inverseRelation :: Ord a => Relation a -> Relation a
 inverseRelation rel = map swap rel
