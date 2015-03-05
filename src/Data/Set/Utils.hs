@@ -14,12 +14,12 @@ module Data.Set.Utils where
 import Data.Set
 import qualified Data.List as List
 import Prelude hiding (map)    
-
+import Control.Monad (filterM)
 
 type Relation a = Set (a,a)
 
-isReflexive :: Relation a -> Bool
-isReflexive = undefined
+isReflexive :: Ord a => Set a -> Relation a -> Bool
+isReflexive set rel = (makeReflexive set) `isSubsetOf` rel
 
 isSymmetric :: Relation a -> Bool
 isSymmetric = undefined
@@ -27,8 +27,9 @@ isSymmetric = undefined
 isTransitive :: Relation a -> Bool
 isTransitive = undefined
 
-powerset :: Set a -> Set (Set a)
-powerset = undefined
+powerset :: Ord a => Set a -> Set [a]
+powerset set = fromList $ filterM (const [True, False]) list
+    where list = toList set
 
 makeReflexive :: Ord a => Set a -> Relation a
 makeReflexive set = map (\a -> (a,a)) set
