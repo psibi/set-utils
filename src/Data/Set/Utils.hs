@@ -13,7 +13,7 @@ module Data.Set.Utils where
 
 import Data.Set
 import qualified Data.List as List
-import Prelude hiding (map)    
+import Prelude hiding (map, length)    
 import Control.Monad (filterM)
 import Data.Tuple (swap)
 
@@ -50,3 +50,5 @@ makeRelation set predicates = fromList $ [(x,y) | x <- list,
                                                   and (List.map (\pred -> pred x y) predicates)]
     where list = toList set 
 
+length :: Set a -> Int
+length = List.length . toList
