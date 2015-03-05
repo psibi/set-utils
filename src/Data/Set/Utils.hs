@@ -15,14 +15,16 @@ import Data.Set
 import qualified Data.List as List
 import Prelude hiding (map)    
 import Control.Monad (filterM)
+import Data.Tuple (swap)
 
 type Relation a = Set (a,a)
 
 isReflexive :: Ord a => Set a -> Relation a -> Bool
 isReflexive set rel = (makeReflexive set) `isSubsetOf` rel
 
-isSymmetric :: Relation a -> Bool
-isSymmetric = undefined
+isSymmetric :: Ord a => Relation a -> Bool
+isSymmetric rel = rel == relInverse
+    where relInverse = map swap rel
 
 isTransitive :: Relation a -> Bool
 isTransitive = undefined
